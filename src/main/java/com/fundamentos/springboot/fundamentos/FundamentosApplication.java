@@ -90,6 +90,10 @@ public class FundamentosApplication implements CommandLineRunner {
 
 		userRepository.findByNameContainingOrderByIdDesc("user").stream().
 				forEach(user->LOGGER.info("Usuario findByNameContainingOrderByIdDesc" + user));
+
+		LOGGER.info(userRepository.getAllByBirthDateAndEmail(LocalDate.of(2021,3,20),"daniela@domain.com")
+				.orElseThrow(()->new RuntimeException("No se encontro el usuario a parto del named oarameter")));
+
 	}
 
 	private void saveUserInDataBase(){
