@@ -62,14 +62,14 @@ public class FundamentosApplication implements CommandLineRunner {
 	public void run(String... args) {
 		//ejemplosAnteriores();
 		saveUserInDataBase();
-		getInformationJpqlFromUser();
-		saveWithErrorTransactional();
+		//getInformationJpqlFromUser();
+		//saveWithErrorTransactional();
 	}
 
 	private void saveWithErrorTransactional(){
 		User test1 =new User("TestTransactional1","TestTransactional1@domain.com", LocalDate.now());
 		User test2 =new User("TestTransactional2","TestTransactional2@domain.com", LocalDate.now());
-		User test3 =new User("TestTransactional3","TestTransactional1@domain.com", LocalDate.now());
+		User test3 =new User("TestTransactional3","TestTransactional3@domain.com", LocalDate.now());
 		User test4 =new User("TestTransactional4","TestTransactional4@domain.com", LocalDate.now());
 
 		List<User> users = Arrays.asList(test1, test2,test3, test4);

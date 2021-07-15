@@ -1,5 +1,6 @@
 package com.fundamentos.springboot.fundamentos.service;
 
+import com.fundamentos.springboot.fundamentos.FundamentosApplication;
 import com.fundamentos.springboot.fundamentos.entity.User;
 import com.fundamentos.springboot.fundamentos.repository.UserRepository;
 import org.apache.commons.logging.Log;
@@ -30,5 +31,7 @@ public class UserService {
     public List<User> getAllUsers(){
         return userRepository.findAll();
     }
+
+
 
 }
