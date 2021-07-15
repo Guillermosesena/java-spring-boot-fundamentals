@@ -5,7 +5,9 @@ import com.fundamentos.springboot.fundamentos.caseuse.DeleteUser;
 import com.fundamentos.springboot.fundamentos.caseuse.GetUser;
 import com.fundamentos.springboot.fundamentos.caseuse.UpdateUser;
 import com.fundamentos.springboot.fundamentos.entity.User;
+import com.fundamentos.springboot.fundamentos.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -26,6 +28,8 @@ public class UserRestController {
     private DeleteUser deleteUser;
     @Autowired
     private UpdateUser updateUser;
+    @Autowired
+    private UserRepository userRepository;
 
     @GetMapping("/")
     List<User> get(){
@@ -46,6 +50,12 @@ public class UserRestController {
     @PutMapping("/{id}")
     ResponseEntity replaceUser(@RequestBody User newUser, @PathVariable Long id) {
         return new ResponseEntity<>(updateUser.update(newUser, id), HttpStatus.OK);
+    }
+
+    //Se acceden usando parametros ?page=1&size=5
+    @GetMapping("/pageable")
+    List<User> getUserPageable(@RequestParam int page, @RequestParam int size){
+        return userRepository.findAll(PageRequest.of(page, size)).getContent();
     }
 
 }
