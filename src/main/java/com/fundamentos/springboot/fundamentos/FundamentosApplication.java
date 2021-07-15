@@ -60,20 +60,36 @@ public class FundamentosApplication implements CommandLineRunner {
 		getInformationJpqlFromUser();
 	}
 
-	private void getInformationJpqlFromUser(){
-		LOGGER.info("Usuario con el método finByUserEmail" +
+	private void getInformationJpqlFromUser() {
+		/*LOGGER.info("Usuario con el método finByUserEmail" +
 				userRepository.finByUserEmail("julie@domain.com")
-				.orElseThrow(()->new RuntimeException("No se encontró el usuario")));
+						.orElseThrow(() -> new RuntimeException("No se encontró el usuario")));
 
 		userRepository.findAndSort("user", Sort.by("id").ascending())
-					.stream()
-					.forEach(user -> LOGGER.info("Usuario con metodo sort" + user));
+				.stream()
+				.forEach(user -> LOGGER.info("Usuario con metodo sort" + user));
 
 		userRepository.findByName("John")
-			.stream()
-			.forEach(user -> LOGGER.info("Usuario con query method" + user));
-		LOGGER.info("Usuario con query nethod findByEmailAndName"+userRepository.findByEmailAndName("julie@domain.com","Julie")
-				.orElseThrow(()-> new RuntimeException("Usuario no encontrado")));
+				.stream()
+				.forEach(user -> LOGGER.info("Usuario con query method" + user));
+		LOGGER.info("Usuario con query nethod findByEmailAndName" + userRepository.findByEmailAndName("julie@domain.com", "Julie")
+				.orElseThrow(() -> new RuntimeException("Usuario no encontrado")));
+
+		userRepository.findByNameLike("%user%").stream().
+			forEach(user->LOGGER.info("Usuario findByNameLike " + user));
+
+		userRepository.findByNameOrEmail("John","user4@domain.com").stream().
+				forEach(user->LOGGER.info("Usuario findByNameOrEmail " + user));*/
+
+		userRepository.findByBirthDateBetween(LocalDate.of(2021,3,1),
+				LocalDate.of(2021,4,2)).stream().
+				forEach(user->LOGGER.info("Usuario findByBirthDateBetween " + user));
+
+		userRepository.findByNameLikeOrderByIdDesc("%user%").stream().
+				forEach(user->LOGGER.info("Usuario findByNameLikeOrderByIdDesc " + user));
+
+		userRepository.findByNameContainingOrderByIdDesc("user").stream().
+				forEach(user->LOGGER.info("Usuario findByNameContainingOrderByIdDesc" + user));
 	}
 
 	private void saveUserInDataBase(){
