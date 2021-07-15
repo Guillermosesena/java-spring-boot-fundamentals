@@ -24,7 +24,15 @@ public class User {
     private LocalDate birthDate;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JsonManagedReference
+
+    /*
+    *Esta anotación te evita el error de Stackoverflow en la respuesta de la API, normalmente cuando se llama información de dos tablas relacionadas hay cierto tipo de bucle (se llama información relacionada de las dos tablas sin algún tipo de final).
+
+Para evitar esto también puedes hacer mapeos manuales de las Clases de Entidad a DTOs para el controlador (Mírate el patrón Facade) o puedes usar la anotación @JsonIgnore
+    *
+    **/
+    //Se comento para funcionar
+    //@JsonManagedReference
     private List<Post> posts = new ArrayList<>();
 
     public User() {
