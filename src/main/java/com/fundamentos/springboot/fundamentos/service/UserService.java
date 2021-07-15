@@ -19,6 +19,7 @@ public class UserService {
     }
 
     //Si ocurre un error durante su ejecución puede hacer rollback de todas las transcciones
+    //evitando inser datos incompeltos
     @Transactional
     public void saveTransactional(List<User> users){
         users.stream()
